@@ -4,7 +4,9 @@ public class CharacterControl : MonoBehaviour
 {
     [SerializeField] private float health;
     [SerializeField] private float speed;
-    [SerializeField] protected float Speed { get {return speed;} set{ speed = value;} }
+    [SerializeField] private float rotationSpeed;
+    protected float RotationSpeed { get {return rotationSpeed;} set{ rotationSpeed = value;} }
+    protected float Speed { get {return speed;} set{ speed = value;} }
     protected float Health
     {
         get {  return health; } //veriyi okurken çalışan metot
