@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private float health;
+    protected float Speed { get; set; }
+    protected float Health
     {
-        
+        get { return health; }
+        set
+        {
+            if (value < 0)
+                health = 0;
+            else
+                health = value;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
 }
