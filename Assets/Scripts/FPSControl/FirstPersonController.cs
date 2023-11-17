@@ -41,7 +41,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private GameObject neck;
         [SerializeField] private GameObject character;
         [SerializeField] private GameObject hasAnimatorObject;
-        [SerializeField] private FirstPersonController fpsController;
+        [SerializeField] private bool isHome;
+
 
 
         private Camera m_Camera;
@@ -77,7 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-                if(Input.GetKeyDown(KeyCode.U))
+            if (Input.GetKeyDown(KeyCode.U))
             {
                 Die();
             }
@@ -103,7 +104,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-            if (Input.GetKeyDown(KeyCode.Q) && !isDashingTime)
+            if (Input.GetKeyDown(KeyCode.Q) && !isDashingTime && !isHome)
             {
                 StartCoroutine(Dash());
             }
@@ -266,22 +267,37 @@ namespace UnityStandardAssets.Characters.FirstPerson
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
-            if (horizontal == 0 && vertical == 0)
+
+            if (isHome)
             {
-                animator.SetBool("IsWalk", false);
-                animator.SetBool("IsRun", false);
-            }
-            else
-            {
-                if (m_IsWalking)
+                if (horizontal == 0 && vertical == 0)
                 {
-                    animator.SetBool("IsRun", true);
                     animator.SetBool("IsWalk", false);
                 }
                 else
                 {
-                    animator.SetBool("IsRun", false);
                     animator.SetBool("IsWalk", true);
+                }
+            }
+            else
+            {
+                if (horizontal == 0 && vertical == 0)
+                {
+                    animator.SetBool("IsWalk", false);
+                    animator.SetBool("IsRun", false);
+                }
+                else
+                {
+                    if (m_IsWalking)
+                    {
+                        animator.SetBool("IsRun", true);
+                        animator.SetBool("IsWalk", false);
+                    }
+                    else
+                    {
+                        animator.SetBool("IsRun", false);
+                        animator.SetBool("IsWalk", true);
+                    }
                 }
             }
 
