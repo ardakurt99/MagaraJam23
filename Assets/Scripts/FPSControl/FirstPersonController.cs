@@ -36,6 +36,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private bool isDashing = false;
         [SerializeField] private bool isDashingTime = false;
 
+        [SerializeField] private Animator animator;
 
 
         private Camera m_Camera;
@@ -243,6 +244,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+
+            if (horizontal == 0 && vertical == 0)
+            {
+                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsRun", false);
+            }
+            else
+            {
+                if (m_IsWalking)
+                {
+                    animator.SetBool("IsRun", true);
+                    animator.SetBool("IsWalk", false);
+                }
+                else
+                {
+                    animator.SetBool("IsRun", false);
+                    animator.SetBool("IsWalk", true);
+                }
+            }
+
 
             bool waswalking = m_IsWalking;
 

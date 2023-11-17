@@ -669,7 +669,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1077106811}
   - component: {fileID: 1077106813}
-  - component: {fileID: 1077106812}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -692,14 +691,6 @@ Transform:
   m_Father: {fileID: 576793531}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!81 &1077106812
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077106810}
-  m_Enabled: 1
 --- !u!20 &1077106813
 Camera:
   m_ObjectHideFlags: 0
@@ -1730,6 +1721,7 @@ MonoBehaviour:
   dashLimitTime: 4
   isDashing: 0
   isDashingTime: 0
+  animator: {fileID: 1844101065}
 --- !u!143 &919132147669356006
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1759,7 +1751,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
