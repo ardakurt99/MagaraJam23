@@ -12,19 +12,20 @@ public class CatMove : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float speed;
     [SerializeField] private float maxTargetDistance;
+    [SerializeField] private float minBossDistance;
 
     NavMeshAgent nav;
     [SerializeField]Animator animator;
     
 
-    public List<Transform> hedefler;
-    public Transform hedef = null;
+    [SerializeField] List<Transform> hedefler;
+    [SerializeField] Transform hedef = null;
 
-    public Transform boss;
-    public Transform adam;
+    [SerializeField] Transform boss;
+    [SerializeField] Transform adam;
 
 
-    public bool bossEtki;
+    [SerializeField] bool bossEtki;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +44,7 @@ public class CatMove : MonoBehaviour
         if (catMode == CatMode.Job)
         {
             transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
-
+            animator.SetBool("IsWalk", true);
 
             if (hedef == null)
             {
@@ -61,6 +62,7 @@ public class CatMove : MonoBehaviour
             else
             {
                 nav.SetDestination(hedef.position);
+                animator.SetBool("IsWalk", true);
             }
 
 
@@ -79,20 +81,19 @@ public class CatMove : MonoBehaviour
 
         if(catMode == CatMode.Boss)
         {
-            nav.SetDestination(boss.position);
             animator.SetBool("IsWalk", true);
-
-                if (Vector3.Distance(transform.position, boss.position) < maxTargetDistance)
-                {
-                    nav.isStopped = false;
-                }
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if(!bossEtki)
             {
-                boss = adam;
+                nav.SetDestination(boss.position);
+                if(nav.remainingDistance <= minBossDistance)
+                bossEtki=true;
+                
+            }
+            else
+            {
                 nav.SetDestination(adam.position);
-
-
+                if(nav.remainingDistance <= minBossDistance)
+                bossEtki=false;
             }
         }
     }

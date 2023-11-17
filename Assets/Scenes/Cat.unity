@@ -8526,7 +8526,8 @@ MonoBehaviour:
   catMode: 0
   health: 0
   speed: 0
-  maxTargetDistance: 0
+  maxTargetDistance: 10
+  minBossDistance: 10
   animator: {fileID: 5604732277115146447}
   hedefler:
   - {fileID: 1759331969}
