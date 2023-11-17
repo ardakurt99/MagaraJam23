@@ -7,14 +7,14 @@ using Random = UnityEngine.Random;
 #pragma warning disable 618, 649
 namespace UnityStandardAssets.Characters.FirstPerson
 {
-    [RequireComponent(typeof (CharacterController))]
-    [RequireComponent(typeof (AudioSource))]
+    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
-        [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
+        [SerializeField][Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
@@ -22,12 +22,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private bool m_UseFovKick;
         //[SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
-        
+
         //[SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] private float m_StepInterval;
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+
+        [SerializeField] private float dashDistance = 5f;
+        [SerializeField] private float dashTime = 0.5f;
+        [SerializeField] private float dashLimit = 4f;
+        [SerializeField] private float dashLimitTime = 4f;
+        [SerializeField] private bool isDashing = false;
+        [SerializeField] private bool isDashingTime = false;
+
+
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -50,12 +59,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
             //m_FovKick.Setup(m_Camera);
-            
+
             m_StepCycle = 0f;
-            m_NextStep = m_StepCycle/2f;
+            m_NextStep = m_StepCycle / 2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-			m_MouseLook.Init(transform , m_Camera.transform);
+            m_MouseLook.Init(transform, m_Camera.transform);
         }
 
 
@@ -82,63 +91,92 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            if (Input.GetKeyDown(KeyCode.Q) && !isDashingTime)
+            {
+                StartCoroutine(Dash());
+            }
+
+            if (dashLimitTime > 0)
+            {
+                dashLimitTime -= Time.deltaTime;
+            }
+            else
+            {
+                dashLimitTime = 0;
+                isDashingTime = false;
+            }
+
+
         }
 
 
         private void PlayLandingSound()
         {
             m_AudioSource.clip = m_LandSound;
-            m_AudioSource.Play();
+            if (!isDashing)
+                m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
+            //Ses gerekecek
         }
 
 
         private void FixedUpdate()
         {
             float speed;
-            GetInput(out speed);
-            // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
 
-            // get a normal for the surface that is being touched to move along it
-            RaycastHit hitInfo;
-            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
-            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
-
-
-            if (m_CharacterController.isGrounded)
+            if (!isDashing)
             {
-                m_MoveDir.y = -m_StickToGroundForce;
+                GetInput(out speed);
 
-                if (m_Jump)
+                // always move along the camera forward as it is the direction that it being aimed at
+                Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
+
+                // get a normal for the surface that is being touched to move along it
+                RaycastHit hitInfo;
+                Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+                                   m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+                desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+
+                m_MoveDir.x = desiredMove.x * speed;
+                m_MoveDir.z = desiredMove.z * speed;
+
+                if (m_CharacterController.isGrounded)
                 {
-                    m_MoveDir.y = m_JumpSpeed;
-                    PlayJumpSound();
-                    m_Jump = false;
-                    m_Jumping = true;
+                    m_MoveDir.y = -m_StickToGroundForce;
+
+                    if (m_Jump)
+                    {
+                        m_MoveDir.y = m_JumpSpeed;
+                        PlayJumpSound();
+                        m_Jump = false;
+                        m_Jumping = true;
+                    }
                 }
-            }
-            else
-            {
-                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
-            }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+                else
+                {
+                    m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
+                }
+                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 
-            ProgressStepCycle(speed);
-            UpdateCameraPosition(speed);
+                ProgressStepCycle(speed);
+                UpdateCameraPosition(speed);
 
-            m_MouseLook.UpdateCursorLock();
+                m_MouseLook.UpdateCursorLock();
+            }
+
+
+
+
+
         }
 
 
         private void PlayJumpSound()
         {
             m_AudioSource.clip = m_JumpSound;
-            m_AudioSource.Play();
+            if (!isDashing)
+                m_AudioSource.Play();
         }
 
 
@@ -146,7 +184,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
             {
-                m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
+                m_StepCycle += (m_CharacterController.velocity.magnitude + (speed * (m_IsWalking ? 1f : m_RunstepLenghten))) *
                              Time.fixedDeltaTime;
             }
 
@@ -187,16 +225,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
             {
-                
 
-                
+
+
             }
             else
             {
                 newCameraPosition = m_Camera.transform.localPosition;
                 //newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
             }
-            
+
         }
 
 
@@ -235,11 +273,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            m_MouseLook.LookRotation(transform, m_Camera.transform);
         }
 
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
+
         {
             Rigidbody body = hit.collider.attachedRigidbody;
             //dont move the rigidbody if the character is on top of it
@@ -252,7 +291,28 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-            body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+            body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+        }
+
+        System.Collections.IEnumerator Dash()
+        {
+            dashLimitTime = dashLimit + dashTime;
+            isDashing = true;
+
+            float startTime = Time.time;
+            float elapsedTime = 0f;
+            Vector3 originalPosition = transform.position;
+            Vector3 dashTarget = originalPosition + transform.forward * dashDistance;
+
+            while (elapsedTime < dashTime)
+            {
+                m_CharacterController.Move((dashTarget - originalPosition) * Time.deltaTime / dashTime);
+                elapsedTime = Time.time - startTime;
+                yield return null;
+            }
+
+            isDashing = false;
+
         }
     }
 }
