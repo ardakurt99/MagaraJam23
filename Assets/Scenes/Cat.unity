@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 847174020}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 1836627510}
   m_Layer: 0
   m_Name: Adam
-  m_TagString: Untagged
+  m_TagString: Adam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8535,9 +8535,11 @@ MonoBehaviour:
   - {fileID: 2116008460}
   hedef: {fileID: 0}
   boss: {fileID: 847174023}
+  bossTag: {fileID: 0}
   adam: {fileID: 1836627513}
+  adamTag: {fileID: 0}
+  gameObjects: []
   bossEtki: 0
-  currentTransform: {fileID: 0}
 --- !u!195 &5604732277115146449
 NavMeshAgent:
   m_ObjectHideFlags: 0

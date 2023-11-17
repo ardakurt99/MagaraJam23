@@ -22,9 +22,11 @@ public class CatMove : MonoBehaviour
     [SerializeField] Transform hedef = null;
 
     [SerializeField] Transform boss;
+    [SerializeField] GameObject bossTag;
     [SerializeField] Transform adam;
+    [SerializeField] GameObject adamTag;
 
-
+    [SerializeField] GameObject[] gameObjects;
     [SerializeField] bool bossEtki;
 
     // Start is called before the first frame update
@@ -41,6 +43,7 @@ public class CatMove : MonoBehaviour
 
     void Update()
     {
+
         if (catMode == CatMode.Job)
         {
             transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
@@ -85,18 +88,30 @@ public class CatMove : MonoBehaviour
             if(!bossEtki)
             {
                 nav.SetDestination(boss.position);
+                
+                
+                
 
-                if(nav.remainingDistance < 10)
-                bossEtki=true;
             }
             else
             {
                 nav.SetDestination(adam.position);
 
-                if(nav.remainingDistance < 10)
-                bossEtki=false;
+
             }
         }
     }
+
+ private void OnCollisionEnter(Collision other) {
+    if(other.collider.CompareTag("Boss"))
+    {
+        bossEtki = true;
+    }
+
+    if(other.collider.CompareTag("Adam"))
+    {
+       bossEtki = false; 
+    }
+}
 
 }
