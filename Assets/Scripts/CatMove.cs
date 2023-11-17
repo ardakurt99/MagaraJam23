@@ -11,10 +11,12 @@ public class CatMove : MonoBehaviour
 
     [SerializeField] private float health;
     [SerializeField] private float speed;
+    [SerializeField] private float maxTargetDistance;
 
     NavMeshAgent nav;
 
-    public Transform hedef, hedef2, hedef3;
+    public List<Transform> hedefler;
+    public Transform hedef = null;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +32,40 @@ public class CatMove : MonoBehaviour
     {
        transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed *Time.deltaTime);
 
-       nav.SetDestination(hedef.position);
-       nav.SetDestination(hedef2.position);
-       nav.SetDestination(hedef3.position);
+    //    nav.SetDestination(hedef.position);
+    //    nav.SetDestination(hedef2.position);
+    //    nav.SetDestination(hedef3.position);
 
+
+        if(hedef == null)
+        {
+            
+        for (int i = 0; i < hedefler.Count; i++)
+        {
+            if(Vector3.Distance(transform.position, hedefler[i].position) < maxTargetDistance)
+            {
+                nav.isStopped = false;
+                hedef = hedefler[i];
+                break;
+            }
+        }
+        }
+        else
+        {
+            nav.SetDestination(hedef.position);
+        }
+        
+
+
+        if(Input.GetKeyDown(KeyCode.Backspace))
+        {
+            hedefler.Remove(hedef);
+            hedef = null;
+            nav.isStopped = true;
+            
+
+            
+        }
     }
 
 }
