@@ -7,6 +7,8 @@ TagManager:
   - Hedef
   - Man
   - Boss
+  - Character
+  - Neck
   layers:
   - Default
   - TransparentFX

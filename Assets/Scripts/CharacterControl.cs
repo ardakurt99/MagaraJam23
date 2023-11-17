@@ -4,6 +4,7 @@ public class CharacterControl : MonoBehaviour
 {
     [Header("Ateş Verileri")]
     [SerializeField, Tooltip("Silahın Ateş etme uzaklığı")] private float range;
+    [SerializeField] private Animator animator;
 
     void Start()
     {
@@ -23,9 +24,10 @@ public class CharacterControl : MonoBehaviour
     private void Shoot()
     {
         RaycastHit hit;
-
+        animator.SetTrigger("Shoot");
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
+            
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
 
             if(rb != null)
