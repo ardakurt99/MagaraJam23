@@ -38,6 +38,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         [SerializeField] private Animator animator;
 
+        [SerializeField] private GameObject neck;
+        [SerializeField] private GameObject character;
+        [SerializeField] private GameObject hasAnimatorObject;
+        [SerializeField] private FirstPersonController fpsController;
+
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -72,6 +77,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+                if(Input.GetKeyDown(KeyCode.U))
+            {
+                Die();
+            }
+
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
@@ -109,6 +119,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
 
+        }
+
+        private void Die()
+        {
+            hasAnimatorObject.transform.SetParent(character.transform);
+            Camera.main.transform.SetParent(neck.transform);
+
+            animator.SetBool("Die", true);
+
+            m_MouseLook.XSensitivity = 0;
+            m_MouseLook.YSensitivity = 0;
         }
 
 
