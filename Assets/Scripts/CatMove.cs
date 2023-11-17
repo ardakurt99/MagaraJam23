@@ -18,6 +18,8 @@ public class CatMove : MonoBehaviour
     public List<Transform> hedefler;
     public Transform hedef = null;
 
+    public Transform adam;
+
     // Start is called before the first frame update
     void Start()
     {
