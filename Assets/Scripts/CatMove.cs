@@ -21,7 +21,7 @@ public class CatMove : MonoBehaviour
     [SerializeField] List<Transform> hedefler;
     [SerializeField] Transform hedef = null;
 
-<<<<<<< Updated upstream
+
     [SerializeField] Transform boss;
     [SerializeField] GameObject bossTag;
     [SerializeField] Transform adam;
@@ -29,13 +29,7 @@ public class CatMove : MonoBehaviour
 
     [SerializeField] GameObject[] gameObjects;
     [SerializeField] bool bossEtki;
-=======
-    public Transform boss;
-    public Transform adam;
->>>>>>> Stashed changes
 
-
-    public bool bossEtki;
 
     // Start is called before the first frame update
     void Start()
@@ -51,18 +45,13 @@ public class CatMove : MonoBehaviour
 
     void Update()
     {
-<<<<<<< Updated upstream
+
 
         if (catMode == CatMode.Job)
         {
             transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
             animator.SetBool("IsWalk", true);
-=======
-        if (catMode == CatMode.Job)
-        {
-            transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
 
->>>>>>> Stashed changes
 
             if (hedef == null)
             {
@@ -80,10 +69,9 @@ public class CatMove : MonoBehaviour
             else
             {
                 nav.SetDestination(hedef.position);
-<<<<<<< Updated upstream
+
                 animator.SetBool("IsWalk", true);
-=======
->>>>>>> Stashed changes
+
             }
 
 
@@ -102,7 +90,7 @@ public class CatMove : MonoBehaviour
 
         if(catMode == CatMode.Boss)
         {
-<<<<<<< Updated upstream
+
             animator.SetBool("IsWalk", true);
             if(!bossEtki)
             {
@@ -114,19 +102,7 @@ public class CatMove : MonoBehaviour
             }
             else
             {
-=======
-            nav.SetDestination(boss.position);
-            animator.SetBool("IsWalk", true);
 
-                if (Vector3.Distance(transform.position, boss.position) < maxTargetDistance)
-                {
-                    nav.isStopped = false;
-                }
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                boss = adam;
->>>>>>> Stashed changes
                 nav.SetDestination(adam.position);
 
 
