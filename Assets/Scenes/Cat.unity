@@ -1202,7 +1202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836627509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.46, y: 0.73, z: 8.21}
+  m_LocalPosition: {x: -18.07, y: 0.73, z: 8.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8527,7 +8527,7 @@ MonoBehaviour:
   health: 0
   speed: 0
   maxTargetDistance: 10
-  minBossDistance: 10
+  minBossDistance: 5
   animator: {fileID: 5604732277115146447}
   hedefler:
   - {fileID: 1759331969}
@@ -8537,6 +8537,7 @@ MonoBehaviour:
   boss: {fileID: 847174023}
   adam: {fileID: 1836627513}
   bossEtki: 0
+  currentTransform: {fileID: 0}
 --- !u!195 &5604732277115146449
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8547,7 +8548,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -8558,7 +8559,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 3
 --- !u!65 &5604732277115146450
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -85,14 +85,15 @@ public class CatMove : MonoBehaviour
             if(!bossEtki)
             {
                 nav.SetDestination(boss.position);
-                if(nav.remainingDistance <= minBossDistance)
+
+                if(nav.remainingDistance < 10)
                 bossEtki=true;
-                
             }
             else
             {
                 nav.SetDestination(adam.position);
-                if(nav.remainingDistance <= minBossDistance)
+
+                if(nav.remainingDistance < 10)
                 bossEtki=false;
             }
         }
