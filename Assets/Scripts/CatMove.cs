@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.PackageManager.Requests;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
+
+public enum CatMode { Boss, Standart, Job }
 
 public class CatMove : MonoBehaviour
 {
 
+    [SerializeField] private CatMode catMode;
     [SerializeField] private float health;
     [SerializeField] private float speed;
     [SerializeField] private float maxTargetDistance;
@@ -30,42 +29,52 @@ public class CatMove : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
-       transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed *Time.deltaTime);
-
-    //    nav.SetDestination(hedef.position);
-    //    nav.SetDestination(hedef2.position);
-    //    nav.SetDestination(hedef3.position);
-
-
-        if(hedef == null)
+        if (catMode == CatMode.Job)
         {
-            
-        for (int i = 0; i < hedefler.Count; i++)
-        {
-            if(Vector3.Distance(transform.position, hedefler[i].position) < maxTargetDistance)
+            transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
+
+            //    nav.SetDestination(hedef.position);
+            //    nav.SetDestination(hedef2.position);
+            //    nav.SetDestination(hedef3.position);
+
+
+            if (hedef == null)
             {
-                nav.isStopped = false;
-                hedef = hedefler[i];
-                break;
+
+                for (int i = 0; i < hedefler.Count; i++)
+                {
+                    if (Vector3.Distance(transform.position, hedefler[i].position) < maxTargetDistance)
+                    {
+                        nav.isStopped = false;
+                        hedef = hedefler[i];
+                        break;
+                    }
+                }
             }
+            else
+            {
+                nav.SetDestination(hedef.position);
+            }
+
+
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                hedefler.Remove(hedef);
+                hedef = null;
+                nav.isStopped = true;
+
+
+            }
+
+
         }
-        }
-        else
+    
+        if(catMode == CatMode.Boss)
         {
-            nav.SetDestination(hedef.position);
-        }
-        
-
-
-        if(Input.GetKeyDown(KeyCode.Backspace))
-        {
-            hedefler.Remove(hedef);
-            hedef = null;
-            nav.isStopped = true;
-            
-
             
         }
     }
