@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,11 +14,17 @@ public class CatMove : MonoBehaviour
     [SerializeField] private float maxTargetDistance;
 
     NavMeshAgent nav;
+    [SerializeField]Animator animator;
+    
 
     public List<Transform> hedefler;
     public Transform hedef = null;
 
+    public Transform boss;
     public Transform adam;
+
+
+    public bool bossEtki;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +32,7 @@ public class CatMove : MonoBehaviour
         speed = 10;
 
         nav = this.gameObject.GetComponent<NavMeshAgent>();
+        
 
     }
 
@@ -35,10 +43,6 @@ public class CatMove : MonoBehaviour
         if (catMode == CatMode.Job)
         {
             transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
-
-            //    nav.SetDestination(hedef.position);
-            //    nav.SetDestination(hedef2.position);
-            //    nav.SetDestination(hedef3.position);
 
 
             if (hedef == null)
@@ -72,10 +76,24 @@ public class CatMove : MonoBehaviour
 
 
         }
-    
+
         if(catMode == CatMode.Boss)
         {
-            
+            nav.SetDestination(boss.position);
+            animator.SetBool("IsWalk", true);
+
+                if (Vector3.Distance(transform.position, boss.position) < maxTargetDistance)
+                {
+                    nav.isStopped = false;
+                }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                boss = adam;
+                nav.SetDestination(adam.position);
+
+
+            }
         }
     }
 
