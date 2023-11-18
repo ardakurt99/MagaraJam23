@@ -5,20 +5,295 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme
+    second: {fileID: 2100000, guid: ff89591a3b2f0b24cb6c88ebce27b392, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.003
+    second: {fileID: 2100000, guid: 91b34dc4285dc9248835fd14eaa63ae2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.005
+    second: {fileID: 2100000, guid: 184ccc8f1142ca14fb44666356e789d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.006
+    second: {fileID: 2100000, guid: 3cc06535e1bc29840a3199cf013e3dc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.007
+    second: {fileID: 2100000, guid: 473a5e7fa8e87454b989b1af222ef082, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.008
+    second: {fileID: 2100000, guid: dee4664eaf09f354faa91f3016e341d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.009
+    second: {fileID: 2100000, guid: d1fa2f01f85f3c546bf3e43760da6eb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.011
+    second: {fileID: 2100000, guid: 7e46ac10c46dbcd4696a2be353e922b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.012
+    second: {fileID: 2100000, guid: e9e232bc7c736b847b5c0302dda3630f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.013
+    second: {fileID: 2100000, guid: de08c88bf7e02bc4bb4397fbef0ab1e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.014
+    second: {fileID: 2100000, guid: 62d6bb3c332d50143ab627cc1fa2132d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.015
+    second: {fileID: 2100000, guid: 4fcb6f9162c797743acbace1fc08c520, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.016
+    second: {fileID: 2100000, guid: 201531a6cbac8b047a89faf9f2c57705, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.017
+    second: {fileID: 2100000, guid: 99a534624e9607a40bd47d2d33ffc00d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.018
+    second: {fileID: 2100000, guid: 6b41866eed521d542870245c8a1d82b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.019
+    second: {fileID: 2100000, guid: 32efd66d789023d4aab7b219187b5c0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.020
+    second: {fileID: 2100000, guid: b8e3a03c72c78d144a59d0639729a19b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.021
+    second: {fileID: 2100000, guid: 9c177fd8a96d64c44996fa2b59cca24e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.022
+    second: {fileID: 2100000, guid: 12de12d815223a244b2f8065841155a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.023
+    second: {fileID: 2100000, guid: 0a8915fa3531ad4458e9ae15ae4efd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.024
+    second: {fileID: 2100000, guid: 2f0d1a9f07fdc214aa35be8e137dafd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.025
+    second: {fileID: 2100000, guid: 8b734a4db28642e46b196869cc4775fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.026
+    second: {fileID: 2100000, guid: 8e103880c56fdfb4e80afbfbe44e8cd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.027
+    second: {fileID: 2100000, guid: 329b9cb0cd35032458872f5da0d4d0e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.038
+    second: {fileID: 2100000, guid: 1dffe712028e83944b4e82160103e925, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.045
+    second: {fileID: 2100000, guid: 6cfc3688e9a4bd54bb6fef34b0dcdc5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.046
+    second: {fileID: 2100000, guid: 9a50f7ed4bb1c0941a0f05653d2cb015, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.047
+    second: {fileID: 2100000, guid: 2a65994450125ea45a94fb8527e38caa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.048
+    second: {fileID: 2100000, guid: d2889b00562ea0a4cb9c003ca33d4d89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.049
+    second: {fileID: 2100000, guid: 7540993f07408df48a26f46fba44d83c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.050
+    second: {fileID: 2100000, guid: 9f8bb519670e8804e904c0ed94901b90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.051
+    second: {fileID: 2100000, guid: 0ed07e502d696e945a9340359d48759c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.052
+    second: {fileID: 2100000, guid: 4568d6adeb990e744a9d8a299eb859fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.053
+    second: {fileID: 2100000, guid: 0220a9621ae9f70468263230e8329e81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.054
+    second: {fileID: 2100000, guid: cbff133d39ab1264eae9a2d424ddff00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.055
+    second: {fileID: 2100000, guid: 61556b99ad2f3214c9e552dd9d43e220, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.056
+    second: {fileID: 2100000, guid: 4fcbc199d9a319242ae9e7cefae2b626, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.057
+    second: {fileID: 2100000, guid: 583e11d41aad12b4e8b2cb635bbfc83e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.058
+    second: {fileID: 2100000, guid: a8005dee1d421c844a6f05ae198b2c16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.059
+    second: {fileID: 2100000, guid: 6d07bf9718d00a64da7799c62bc55677, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.060
+    second: {fileID: 2100000, guid: 24397ae8948b12c42ad93756e2f16e2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.061
+    second: {fileID: 2100000, guid: d263d172566072046a7ac9144419bb72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.062
+    second: {fileID: 2100000, guid: 14ef2c60de4c0ae40836ae937a911817, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.063
+    second: {fileID: 2100000, guid: d1f87fc41e513694e9f1b3d32047cab1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.064
+    second: {fileID: 2100000, guid: f0673fea6f72fec41a547c8438334294, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.065
+    second: {fileID: 2100000, guid: 63ffb01735785e94c8c6dc1c4abb9443, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.066
+    second: {fileID: 2100000, guid: ecfbb2192f5dba743879fecd4b3d8500, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.067
+    second: {fileID: 2100000, guid: 16c50e4a76f15ab4c8d3c5e08b7c3f0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.068
+    second: {fileID: 2100000, guid: 5335df009b539154eb5a1d1d497d4e7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.069
+    second: {fileID: 2100000, guid: eaf3035b35bcfdc4bb496b97c39d07eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.070
+    second: {fileID: 2100000, guid: 420697e87775b0d419f1a98c8942a286, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.071
+    second: {fileID: 2100000, guid: 22ebb44c5dcdee1438e4a4aea3785e45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Malzeme.072
+    second: {fileID: 2100000, guid: 79cbd7e6b7a97d242a4c753719e7eed3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 53827517b38b310468ab52d8a8df0d14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "peypazar\u0131"
+    second: {fileID: 2100000, guid: 5d58ae71e5e1fa04293a8195b1971cc5, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: "Ekran g\xF6r\xFCnt\xFCs\xFC 2023-11-18 153913"
-    second: {fileID: 2800000, guid: a702bbadb20d214468ed8aab0be011ea, type: 3}
+    second: {fileID: 2800000, guid: e859fab46cc87de4e9a1e7658b236a42, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: "peypazar\u0131"
-    second: {fileID: 2800000, guid: 7266c90d27a59b24eac40bd8aed13ced, type: 3}
+    second: {fileID: 2800000, guid: b2feeef7b8e63254fb992e441daf524a, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: the_backrooms_wallpaper__seamless__by_dalay_lamma_df1ci3n-fullview
-    second: {fileID: 2800000, guid: fb4f35bc30cea8849a17e2ad23e04d69, type: 3}
+    second: {fileID: 2800000, guid: c2df66c9b6a425a45b1498bcbbb0113a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

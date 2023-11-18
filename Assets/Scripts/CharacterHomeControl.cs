@@ -57,57 +57,61 @@ public class CharacterHomeControl : MonoBehaviour
 
     private void Update()
     {
+
+        switch (beginMode)
+        {
+            case BeginMode.WillHoldComic:
+                if (!Input.GetKeyDown(KeyCode.E))
+                {
+                    speachText.text = "Çizgi romanı tutmak için E tuşuna basın";
+                    spachBg.color = new Color32(0, 0, 0, 220);
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    speachText.text = "";
+                    spachBg.color = new Color32(0, 0, 0, 0);
+
+                    beginMode = BeginMode.HoldComic;
+                    comicBook.SetActive(false);
+
+                    animator.SetBool("Read", true);
+                    hasAnimatorObject.SetActive(true);
+                    comicPage3D.SetActive(true);
+                    hasAnimatorObject.transform.position = readTransform.position;
+                    hasAnimatorObject.transform.rotation = readTransform.rotation;
+                }
+                break;
+            case BeginMode.HoldComic:
+                if (!Input.GetKeyDown(KeyCode.E))
+                {
+                    if (camera.fieldOfView > 30)
+                    {
+                        camera.fieldOfView -= Time.deltaTime * 30;
+                    }
+                    else
+                    {
+                        camera.fieldOfView = 30;
+                    }
+
+                    speachText.text = "Okuduğunuzda E tuşuna basın";
+                    spachBg.color = new Color32(0, 0, 0, 220);
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    beginMode = BeginMode.SceneTransition;
+
+                    StartCoroutine(SceneTransition());
+
+
+                }
+                break;
+        }
         if (Input.GetKeyDown(KeyCode.E) && doorCanOpen && !doorIsOpen)
         {
             doorAnim.SetTrigger("Open");
             doorIsOpen = true;
             speachText.text = "";
             spachBg.color = new Color32(0, 0, 0, 0);
-        }
-
-        if (beginMode == BeginMode.WillHoldComic && !Input.GetKeyDown(KeyCode.E))
-        {
-            speachText.text = "Çizgi romanı tutmak için E tuşuna basın";
-            spachBg.color = new Color32(0, 0, 0, 220);
-        }
-        else if (beginMode == BeginMode.WillHoldComic && Input.GetKeyDown(KeyCode.E))
-        {
-            speachText.text = "";
-            spachBg.color = new Color32(0, 0, 0, 0);
-
-            beginMode = BeginMode.HoldComic;
-            comicBook.SetActive(false);
-
-            animator.SetBool("Read", true);
-            hasAnimatorObject.SetActive(true);
-            comicPage3D.SetActive(true);
-            hasAnimatorObject.transform.position = readTransform.position;
-            hasAnimatorObject.transform.rotation = readTransform.rotation;
-
-
-        }
-
-        if (beginMode == BeginMode.HoldComic && !Input.GetKeyDown(KeyCode.E))
-        {
-            if (camera.fieldOfView > 30)
-            {
-                camera.fieldOfView -= Time.deltaTime * 30;
-            }
-            else
-            {
-                camera.fieldOfView = 30;
-            }
-
-            speachText.text = "Okuduğunuzda F tuşuna basın";
-            spachBg.color = new Color32(0, 0, 0, 220);
-        }
-        else if (beginMode == BeginMode.HoldComic && Input.GetKeyDown(KeyCode.F))
-        {
-            beginMode = BeginMode.SceneTransition;
-
-            StartCoroutine(SceneTransition());
-
-
         }
     }
 
@@ -191,8 +195,6 @@ public class CharacterHomeControl : MonoBehaviour
 
                 vignette.intensity.value += .05f;
                 yield return new WaitForSeconds(.05f);
-
-
             }
         }
 

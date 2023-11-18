@@ -868,6 +868,8 @@ MonoBehaviour:
   comicBook: {fileID: 587077914}
   comicPage3D: {fileID: 341921992}
   readTransform: {fileID: 352883508}
+  postProcessVolume: {fileID: 1198406760}
+  vignette: {fileID: 0}
   doorBell: {fileID: 47561681}
   doorAnim: {fileID: 47561680}
   doorTransform: {fileID: 47561679}
