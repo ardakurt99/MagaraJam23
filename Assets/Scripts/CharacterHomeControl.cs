@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-enum BeginMode { FirstText, Bell, ShowTheDoor, SeeComic, WillHoldComic, HoldComic }
+using UnityEngine.Rendering.PostProcessing;
+enum BeginMode { FirstText, Bell, ShowTheDoor, SeeComic, WillHoldComic, HoldComic, SceneTransition }
 public class CharacterHomeControl : MonoBehaviour
 {
     [SerializeField, TextArea(3, 10)] private List<string> beginText;
@@ -18,6 +18,9 @@ public class CharacterHomeControl : MonoBehaviour
     [SerializeField] private GameObject comicBook;
     [SerializeField] private GameObject comicPage3D;
     [SerializeField] private Transform readTransform;
+
+    [SerializeField] private PostProcessVolume postProcessVolume;
+    [SerializeField] private Vignette vignette;
     private int beginTextIndex = 0;
     private int comicTextIndex = 0;
 
@@ -30,9 +33,11 @@ public class CharacterHomeControl : MonoBehaviour
     [SerializeField] private bool doorCanOpen = false;
 
 
+    private Camera camera;
+
     private void Start()
     {
-
+        camera = Camera.main.GetComponent<Camera>();
         if (!PlayerPrefs.HasKey("Episode"))
         {
             PlayerPrefs.SetInt("Episode", 0);
@@ -45,7 +50,8 @@ public class CharacterHomeControl : MonoBehaviour
 
         if (beginMode == BeginMode.FirstText)
         {
-            StartCoroutine(ShowBeginText(5));
+            //StartCoroutine(ShowBeginText(5));
+            StartCoroutine(ShowBeginText(3));
         }
     }
 
@@ -59,15 +65,7 @@ public class CharacterHomeControl : MonoBehaviour
             spachBg.color = new Color32(0, 0, 0, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            animator.SetBool("Read", true);
-
-            hasAnimatorObject.transform.position = readTransform.position;
-            hasAnimatorObject.transform.rotation = readTransform.rotation;
-        }
-
-        if(beginMode == BeginMode.WillHoldComic && !Input.GetKeyDown(KeyCode.E))
+        if (beginMode == BeginMode.WillHoldComic && !Input.GetKeyDown(KeyCode.E))
         {
             speachText.text = "Çizgi romanı tutmak için E tuşuna basın";
             spachBg.color = new Color32(0, 0, 0, 220);
@@ -85,6 +83,31 @@ public class CharacterHomeControl : MonoBehaviour
             comicPage3D.SetActive(true);
             hasAnimatorObject.transform.position = readTransform.position;
             hasAnimatorObject.transform.rotation = readTransform.rotation;
+
+
+        }
+
+        if (beginMode == BeginMode.HoldComic && !Input.GetKeyDown(KeyCode.E))
+        {
+            if (camera.fieldOfView > 30)
+            {
+                camera.fieldOfView -= Time.deltaTime * 30;
+            }
+            else
+            {
+                camera.fieldOfView = 30;
+            }
+
+            speachText.text = "Okuduğunuzda F tuşuna basın";
+            spachBg.color = new Color32(0, 0, 0, 220);
+        }
+        else if (beginMode == BeginMode.HoldComic && Input.GetKeyDown(KeyCode.F))
+        {
+            beginMode = BeginMode.SceneTransition;
+
+            StartCoroutine(SceneTransition());
+
+
         }
     }
 
@@ -121,7 +144,7 @@ public class CharacterHomeControl : MonoBehaviour
 
                 yield return new WaitForSeconds(time);
 
-                if(beginText.Count -1 == i)
+                if (beginText.Count - 1 == i)
                 {
                     beginMode = BeginMode.WillHoldComic;
                 }
@@ -148,5 +171,33 @@ public class CharacterHomeControl : MonoBehaviour
             }
             yield return new WaitForSeconds(.5f);
         }
+    }
+
+    private IEnumerator SceneTransition()
+    {
+        Debug.Log("Buraya Girdi");
+        yield return new WaitForSeconds(.5f);
+
+        while (postProcessVolume.weight < 1)
+        {
+            postProcessVolume.weight += .05f;
+            yield return new WaitForSeconds(.05f);
+        }
+        yield return new WaitForSeconds(.15f);
+        if (postProcessVolume.profile.TryGetSettings(out vignette))
+        {
+            while (vignette.intensity.value < 1)
+            {
+
+                vignette.intensity.value += .05f;
+                yield return new WaitForSeconds(.05f);
+
+
+            }
+        }
+
+
+        speachText.text = "Burdan sonra sahne geçecek";
+        spachBg.color = new Color32(0, 0, 0, 220);
     }
 }

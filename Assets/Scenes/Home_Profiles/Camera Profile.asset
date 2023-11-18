@@ -30,12 +30,12 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 1
+    value: 10
   anamorphicRatio:
     overrideState: 1
     value: 0
   color:
-    overrideState: 0
+    overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
   fastMode:
     overrideState: 1
@@ -90,8 +90,8 @@ MonoBehaviour:
     overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 0.58
   smoothness:
     overrideState: 0
     value: 0.2
