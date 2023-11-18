@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Windows.Speech;
 
 public enum CatMode { Boss, Standart, Job }
 
@@ -49,9 +50,10 @@ public class CatMove : MonoBehaviour
 
         if (catMode == CatMode.Job)
         {
-            transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
+            transform.Translate(new Vector3(0, Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
             animator.SetBool("IsWalk", true);
 
+            transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * speed * 10 * Time.deltaTime);
 
             if (hedef == null)
             {
