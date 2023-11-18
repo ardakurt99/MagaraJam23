@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+
+    [SerializeField] private AudioSource clickFx;
+    public void PlaySound()
+    {
+        clickFx.Stop();
+        clickFx.Play();
+    }
     public void LoadMainScene()
     {
         SceneManager.LoadScene("Menu");
