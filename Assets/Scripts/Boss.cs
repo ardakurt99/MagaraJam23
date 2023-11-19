@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+enum BossType { Boss1, Boss2, Boss3 }
 public class Boss : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
-
-    [SerializeField] GameObject bossHead;
     [SerializeField] private GameObject character;
     [SerializeField] private Animator anim;
 
@@ -37,6 +37,14 @@ public class Boss : MonoBehaviour
     [SerializeField] private float punchDamageDamageAmount;
 
 
+    [Header("Sesler")]
+    [SerializeField] private AudioSource stepSound;
+    [SerializeField] private AudioSource punchSound;
+    [SerializeField] private AudioSource jumpSound;
+
+    [Header("Boss Tipi")]
+    [SerializeField] private BossType bossType;
+
     private void Start()
     {
         firstHealth = health;
@@ -44,14 +52,16 @@ public class Boss : MonoBehaviour
 
 
         StartCoroutine("Fight");
-        StartCoroutine(CatControl());
+
+        if (bossType == BossType.Boss1)
+            StartCoroutine(CatControl());
 
     }
     void Update()
     {
         // Objenin hedefe doğru dönmesi
 
-        if (catFocus)
+        if (catFocus && bossType == BossType.Boss1)
             transform.LookAt(catTransform);
         else
             transform.LookAt(character.transform);
@@ -69,7 +79,7 @@ public class Boss : MonoBehaviour
     {
         anim.SetBool("Walk", true);
 
-        if(catFocus)
+        if (catFocus)
         {
             agent.isStopped = true;
             return;
@@ -79,7 +89,7 @@ public class Boss : MonoBehaviour
             agent.isStopped = false;
             agent.SetDestination(character.transform.position);
         }
-        
+
 
         //Debug.Log($"{agent.remainingDistance } - {areaDamageDistance}");
 
@@ -124,6 +134,31 @@ public class Boss : MonoBehaviour
         {
             areaFightRatio = .7f;
         }
+
+        if (health < 0)
+        {
+            health = 0;
+
+            anim.SetBool("Die", true);
+        }
+    }
+
+    public void BossStep()
+    {
+        stepSound.Stop();
+        stepSound.Play();
+    }
+
+    public void BossJump()
+    {
+        jumpSound.Stop();
+        jumpSound.Play();
+    }
+
+    public void BossPunch()
+    {
+        punchSound.Stop();
+        punchSound.Play();
     }
 
     private IEnumerator Fight()

@@ -6,11 +6,10 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Slider loadSlider;
     [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private Slider slider;
 
-    public void LoadLevel (int sceneIndex)
+    public void LoadLevel ()
     {
-        StartCoroutine(LoadScene(sceneIndex));
+        StartCoroutine(LoadScene(1));
     }
 
     System.Collections.IEnumerator LoadScene(int sceneIndex)
@@ -23,6 +22,7 @@ public class LevelLoader : MonoBehaviour
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
             loadSlider.value = progress;
+            Debug.Log(progress);
             yield return null;
         }
     }

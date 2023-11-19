@@ -42,7 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private GameObject character;
         [SerializeField] private GameObject hasAnimatorObject;
         [SerializeField] private bool isHome;
-
+        [SerializeField] private AudioSource dashSound;
 
 
         private Camera m_Camera;
@@ -106,6 +106,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (Input.GetKeyDown(KeyCode.Q) && !isDashingTime && !isHome)
             {
+                dashSound.Stop();
+                dashSound.Play();
                 StartCoroutine(Dash());
             }
 
