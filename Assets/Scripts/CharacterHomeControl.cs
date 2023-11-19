@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
-enum BeginMode { FirstText, Bell, ShowTheDoor, SeeComic, WillHoldComic, HoldComic, SceneTransition }
+enum BeginMode { Museum, FirstText, Bell, ShowTheDoor, SeeComic, WillHoldComic, HoldComic, SceneTransition }
 public class CharacterHomeControl : MonoBehaviour
 {
     [SerializeField, TextArea(3, 10)] private List<string> beginText;
