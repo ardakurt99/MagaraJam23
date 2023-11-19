@@ -195,4 +195,12 @@ public class CharacterHomeControl : MonoBehaviour
         speachText.text = "Burdan sonra sahne geçecek";
         spachBg.color = new Color32(0, 0, 0, 220);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Sise"))
+        {
+
+        }
+    }
 }

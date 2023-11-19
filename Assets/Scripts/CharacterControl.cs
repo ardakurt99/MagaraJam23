@@ -29,6 +29,9 @@ public class CharacterControl : MonoBehaviour
             Shoot();
         }
 
+        
+
+
         Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + (Camera.main.transform.forward * range), Color.black);
     }
 

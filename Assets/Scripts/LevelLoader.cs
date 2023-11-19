@@ -7,9 +7,17 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] private Slider loadSlider;
     [SerializeField] private GameObject loadingScreen;
 
-    public void LoadLevel ()
+    public void LoadLevel()
     {
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex+1));
+        if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            StartCoroutine(LoadScene(0));
+        }
+        else
+        {
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+        }
+
     }
 
     System.Collections.IEnumerator LoadScene(int sceneIndex)
@@ -18,7 +26,7 @@ public class LevelLoader : MonoBehaviour
 
         loadingScreen.SetActive(true);
 
-        while(!operation.isDone)
+        while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
             loadSlider.value = progress;

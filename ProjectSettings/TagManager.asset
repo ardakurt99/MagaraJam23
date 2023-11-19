@@ -16,6 +16,7 @@ TagManager:
   - Giris
   - Cikis
   - BossDoor
+  - Sise
   layers:
   - Default
   - TransparentFX
