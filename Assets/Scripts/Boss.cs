@@ -60,6 +60,11 @@ public class Boss : MonoBehaviour
     }
     void Update()
     {
+        if(Health <= 0)
+        {
+            agent.isStopped = true;
+            return;
+        }
         // Objenin hedefe doğru dönmesi
 
         if (catFocus && bossType == BossType.Boss1)
@@ -68,7 +73,7 @@ public class Boss : MonoBehaviour
             transform.LookAt(new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z));
 
 
-        if (isAttack)
+        if (isAttack && isActive)
         {
             Attack();
         }
@@ -87,7 +92,7 @@ public class Boss : MonoBehaviour
         }
         else
         {
-            agent.isStopped = false;
+            //agent.isStopped = false;
             agent.SetDestination(character.transform.position);
         }
 
@@ -196,7 +201,7 @@ public class Boss : MonoBehaviour
 
     private IEnumerator Fight()
     {
-        if (!catFocus && isActive)
+        if (!catFocus && isActive && Health > 0)
         {
             agent.isStopped = false;
 
@@ -206,6 +211,7 @@ public class Boss : MonoBehaviour
 
             isAttack = true;
         }
+
     }
 
     private IEnumerator CatControl()
