@@ -11,6 +11,11 @@ TagManager:
   - Cat
   - Back
   - Boss
+  - Hedef
+  - Adam
+  - Giris
+  - Cikis
+  - BossDoor
   layers:
   - Default
   - TransparentFX
@@ -19,7 +24,7 @@ TagManager:
   - Water
   - UI
   - PostProccess
-  - 
+  - Character
   - 
   - 
   - 

@@ -2,126 +2,84 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Windows.Speech;
+using UnityStandardAssets.Characters.FirstPerson;
 
-public enum CatMode { Boss, Standart, Job }
+public enum CatMode {Follow, Job, Boss }
 
 public class CatMove : MonoBehaviour
 {
+    [SerializeField] private GameObject bossPosition;
+    [SerializeField] NavMeshAgent agent;
 
-    [SerializeField] private CatMode catMode;
-    [SerializeField] private float health;
-    [SerializeField] private float speed;
-    [SerializeField] private float maxTargetDistance;
-    [SerializeField] private float minBossDistance;
+    [SerializeField] private Animator anim;
 
-    NavMeshAgent nav;
-    [SerializeField]Animator animator;
-    
+    [SerializeField] private GameObject boss;
+    [SerializeField] private GameObject character;
 
-    [SerializeField] List<Transform> hedefler;
-    [SerializeField] Transform hedef = null;
+    [SerializeField] CatMode catMode;
 
+    [SerializeField] private FirstPersonController fpsScript;
+    [SerializeField] private GameObject door;
 
-    [SerializeField] Transform boss;
-    [SerializeField] GameObject bossTag;
-    [SerializeField] Transform adam;
-    [SerializeField] GameObject adamTag;
-
-    [SerializeField] GameObject[] gameObjects;
-    [SerializeField] bool bossEtki;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        speed = 10;
-
-        nav = this.gameObject.GetComponent<NavMeshAgent>();
-        
-
-    }
-
-    // Update is called once per frame
-
-    void Update()
-    {
-
-
-        if (catMode == CatMode.Job)
+        switch (catMode)
         {
-            transform.Translate(new Vector3(0, Input.GetAxis("Jump"), Input.GetAxis("Vertical")) * speed * Time.deltaTime);
-            animator.SetBool("IsWalk", true);
+            case CatMode.Follow:
 
-            transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * speed * 10 * Time.deltaTime);
+                transform.LookAt(new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z));
 
-            if (hedef == null)
-            {
-
-                for (int i = 0; i < hedefler.Count; i++)
+                if (Vector3.Distance(new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z), transform.position) < 6.5f)
                 {
-                    if (Vector3.Distance(transform.position, hedefler[i].position) < maxTargetDistance)
-                    {
-                        nav.isStopped = false;
-                        hedef = hedefler[i];
-                        break;
-                    }
+                    anim.SetBool("IsWalk", false);
                 }
-            }
-            else
-            {
-                nav.SetDestination(hedef.position);
+                else
+                {
+                    transform.Translate(Vector3.forward * Time.deltaTime * 3);
+                    anim.SetBool("IsWalk", true);
+                }
+                break;
+            case CatMode.Job:
 
-                animator.SetBool("IsWalk", true);
+                transform.Translate(new Vector3(0, 0, Input.GetAxis("Vertical")) * 5 * Time.deltaTime);
+                anim.SetBool("IsWalk", true);
 
-            }
-
-
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                hedefler.Remove(hedef);
-                hedef = null;
-                nav.isStopped = true;
+                transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * 5 * 10 * Time.deltaTime);
 
 
-            }
+                //nav.SetDestination(hedef.position);
+
+                anim.SetBool("IsWalk", true);
+
+                break;
 
 
+            case CatMode.Boss:
+
+                transform.LookAt(new Vector3(bossPosition.transform.position.x, transform.position.y, bossPosition.transform.position.z));
+
+                transform.Translate(Vector3.forward * Time.deltaTime * 3);
+                break;
         }
+    }
 
-        if(catMode == CatMode.Boss)
+    public void ChaangeMode(CatMode mode)
+    {
+        catMode = mode;
+    }
+
+    public CatMode ReadCatMode() => catMode;
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Cikis"))
         {
+            catMode = CatMode.Boss;
 
-            animator.SetBool("IsWalk", true);
-            if(!bossEtki)
-            {
-                nav.SetDestination(boss.position);
-                
-                
-                
-
-            }
-            else
-            {
-
-                nav.SetDestination(adam.position);
-
-
-            }
+            fpsScript.IsMove = true;
+            fpsScript.GlassAnim.SetTrigger("Close");
+            door.SetActive(false);
         }
     }
-
- private void OnCollisionEnter(Collision other) {
-    if(other.collider.CompareTag("Boss"))
-    {
-        bossEtki = true;
-    }
-
-    if(other.collider.CompareTag("Adam"))
-    {
-       bossEtki = false; 
-    }
-}
-
 }

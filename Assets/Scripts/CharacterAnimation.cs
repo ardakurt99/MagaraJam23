@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterAnimation : MonoBehaviour
 {
     [SerializeField] private AudioSource pistolSound;
     [SerializeField] private float range;
     [SerializeField] private ParticleSystem fireBomb;
+    [SerializeField] private CharacterControl characterScript;
     public void PistolSound()
     {
         pistolSound.Stop();
@@ -19,20 +21,11 @@ public class CharacterAnimation : MonoBehaviour
 
     public void Shoot()
     {
-        RaycastHit hit;
+        characterScript.ShootGun();
+    }
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
-        {
-
-            if (hit.collider.CompareTag("Boss"))
-            {
-                Debug.Log("10 Hasar");
-            }
-            else if (hit.collider.CompareTag("Back"))
-            {
-                Debug.Log("20 Hasar");
-            }
-
-        }
+    public void SceneReload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

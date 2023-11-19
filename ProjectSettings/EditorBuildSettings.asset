@@ -12,6 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: b500e8b9b43e37544899348b352561d6
   - enabled: 1
+    path: Assets/Scenes/Episode1.unity
+    guid: e477f6a46be3e4a47aea6bd0399d10cd
+  - enabled: 1
+    path: Assets/Scenes/Episode2.unity
+    guid: edd6deaca42f3e14dad7cc67f395e942
+  - enabled: 1
+    path: Assets/Scenes/Episode3.unity
+    guid: 65123fb794966a64696fd74c91f2dcf3
+  - enabled: 1
+    path: Assets/Scenes/Muze.unity
+    guid: c3e4027f71fab6242a491688e52f458f
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1

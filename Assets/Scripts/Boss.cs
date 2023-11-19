@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.SceneManagement;
 
 enum BossType { Boss1, Boss2, Boss3 }
 public class Boss : MonoBehaviour
@@ -10,6 +10,7 @@ public class Boss : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject character;
     [SerializeField] private Animator anim;
+    [SerializeField] private LevelLoader screenLoader;
 
 
     [Header("Kedi Ayarları")]
@@ -17,8 +18,8 @@ public class Boss : MonoBehaviour
     [SerializeField] private bool catFocus;
 
     [Header("Can ayarları")]
-    [SerializeField] private float health;
-    [SerializeField] private float firstHealth;
+    public float Health;
+    public float FirstHealth;
 
     [Header("Karekter ile alakalı ayarları")]
     [SerializeField] private float targetDistance;
@@ -26,6 +27,7 @@ public class Boss : MonoBehaviour
 
 
     [Header("Saldırı Ayarları")]
+    [SerializeField] private bool isActive;
     [SerializeField] private float areaDamageDistance;
     [SerializeField] private float punchDamageDistance;
     [SerializeField] private float areaFightRatio;
@@ -47,24 +49,23 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
-        firstHealth = health;
+        FirstHealth = Health;
 
 
-
+        if(isActive)
         StartCoroutine("Fight");
 
         if (bossType == BossType.Boss1)
             StartCoroutine(CatControl());
-
     }
     void Update()
     {
         // Objenin hedefe doğru dönmesi
 
         if (catFocus && bossType == BossType.Boss1)
-            transform.LookAt(catTransform);
+            transform.LookAt(new Vector3(catTransform.transform.position.x, transform.position.y, catTransform.transform.position.z));
         else
-            transform.LookAt(character.transform);
+            transform.LookAt(new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z));
 
 
         if (isAttack)
@@ -126,21 +127,38 @@ public class Boss : MonoBehaviour
         StartCoroutine(CatControl());
     }
 
-    internal void TakeDamge(float amount)
+    internal void ChangeActive(bool active)
     {
-        health -= amount;
+        isActive = active;
 
-        if (firstHealth / 2 >= health)
+
+
+        if (isActive)
+            StartCoroutine("Fight");
+
+        if (bossType == BossType.Boss1)
+            StartCoroutine(CatControl());
+    }
+
+    internal void TakeDamage(float amount)
+    {
+        Health -= amount;
+
+        Debug.Log(Health);
+
+        if (FirstHealth / 2 >= Health)
         {
             areaFightRatio = .7f;
         }
 
-        if (health < 0)
+        if (Health <= 0)
         {
-            health = 0;
+            Health = 0;
 
             anim.SetBool("Die", true);
         }
+
+        
     }
 
     public void BossStep()
@@ -153,17 +171,32 @@ public class Boss : MonoBehaviour
     {
         jumpSound.Stop();
         jumpSound.Play();
+
+        if (Vector3.Distance(new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z), transform.position) <= areaDamageDistance)
+        {
+            character.GetComponent<CharacterControl>().TakeDamage(areaDamageDamageAmount);
+        }
     }
 
     public void BossPunch()
     {
         punchSound.Stop();
         punchSound.Play();
+
+        if(Vector3.Distance(character.transform.position, transform.position) <= punchDamageDistance)
+        {
+            character.GetComponent<CharacterControl>().TakeDamage(punchDamageDamageAmount);
+        }
+    }
+
+    public void NextScene()
+    {
+        screenLoader.LoadLevel();
     }
 
     private IEnumerator Fight()
     {
-        if (!catFocus)
+        if (!catFocus && isActive)
         {
             agent.isStopped = false;
 

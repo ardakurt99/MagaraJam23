@@ -11,6 +11,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof(AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
+        [SerializeField] private GameObject fight;
+
+
+        [SerializeField] private GameObject bossDoor; 
+        [SerializeField] private Boss bossScript;
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
@@ -59,6 +64,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+
+        [SerializeField] private CatMove catScript;
+        public Animator GlassAnim;
+
+        public bool IsMove = true;
+
         // Use this for initialization
         private void Start()
         {
@@ -78,14 +89,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                Die();
-            }
 
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
+            if (!m_Jump && IsMove)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -104,7 +111,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-            if (Input.GetKeyDown(KeyCode.Q) && !isDashingTime && !isHome)
+            if (Input.GetKeyDown(KeyCode.Q) && !isDashingTime && !isHome && IsMove)
             {
                 dashSound.Stop();
                 dashSound.Play();
@@ -124,7 +131,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         }
 
-        private void Die()
+        public void Die()
         {
             hasAnimatorObject.transform.SetParent(character.transform);
             Camera.main.transform.SetParent(neck.transform);
@@ -266,6 +273,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
+
+            if (!IsMove)
+            {
+                speed = 0f;
+                return;
+            }
+                
+
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
@@ -373,6 +388,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             isDashing = false;
 
+        }
+
+        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Giris") && catScript.ReadCatMode() == CatMode.Follow)
+            {
+                IsMove = false;
+                catScript.ChaangeMode(CatMode.Job);
+                GlassAnim.SetTrigger("Open");
+            }
+            else if(other.CompareTag("BossDoor"))
+            {
+                bossScript.ChangeActive(true);
+
+                fight.SetActive(true);
+
+                bossDoor.transform.GetComponent<Collider>().isTrigger = false;
+
+            }
         }
     }
 }
