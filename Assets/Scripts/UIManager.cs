@@ -7,6 +7,19 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private AudioSource[] sources;
+
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("Sound"))
+        {
+            PlayerPrefs.SetFloat("Sound", .5f);
+        }
+        slider.value = PlayerPrefs.GetFloat("Sound");
+        foreach (var item in sources)
+        {
+            item.volume = PlayerPrefs.GetFloat("Sound");
+        }
+    }
     public void SoundSettings()
     {
         PlayerPrefs.SetFloat("Sound", slider.value);
