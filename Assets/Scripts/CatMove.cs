@@ -49,7 +49,9 @@ public class CatMove : MonoBehaviour
 
                 //nav.SetDestination(hedef.position);
 
-                anim.SetBool("IsWalk", true);
+                
+
+                anim.SetBool("IsWalk", !(Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0));
 
                 break;
 
