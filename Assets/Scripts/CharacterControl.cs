@@ -27,14 +27,16 @@ public class CharacterControl : MonoBehaviour
         animator.SetTrigger("Shoot");
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
-            
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
 
-            if(rb != null)
+            if(hit.collider.CompareTag("Boss"))
             {
-                rb.AddForce(Vector3.forward * 5, ForceMode.Impulse);
+                Debug.Log("10 Hasar");
             }
-            
+            else if(hit.collider.CompareTag("Back"))
+            {
+                Debug.Log("20 Hasar");
+            }
+
         }
     }
 }

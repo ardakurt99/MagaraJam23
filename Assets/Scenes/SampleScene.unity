@@ -2094,7 +2094,7 @@ MonoBehaviour:
   neck: {fileID: 7492347807012487737}
   character: {fileID: 919132147669356003}
   hasAnimatorObject: {fileID: 1844101063}
-  fpsController: {fileID: 0}
+  isHome: 0
 --- !u!143 &919132147669356006
 CharacterController:
   m_ObjectHideFlags: 0

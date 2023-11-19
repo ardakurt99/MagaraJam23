@@ -7,6 +7,10 @@ TagManager:
   - Character
   - Neck
   - DoorSensor
+  - Head
+  - Cat
+  - Back
+  - Boss
   layers:
   - Default
   - TransparentFX

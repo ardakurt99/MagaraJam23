@@ -32,7 +32,6 @@ public class CharacterHomeControl : MonoBehaviour
     private bool doorIsOpen = false;
     [SerializeField] private bool doorCanOpen = false;
 
-
     private Camera camera;
 
     private void Start()
@@ -57,7 +56,6 @@ public class CharacterHomeControl : MonoBehaviour
 
     private void Update()
     {
-
         switch (beginMode)
         {
             case BeginMode.WillHoldComic:
