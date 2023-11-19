@@ -1543,8 +1543,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1.9999999, z: 1.0000002}
-  m_Center: {x: 0.00000005960464, y: 0, z: -0.00000008940695}
+  m_Size: {x: 1.2408397, y: 4.571188, z: 1.1003691}
+  m_Center: {x: 0.018157395, y: 1.285597, z: 0.051538277}
 --- !u!136 &770696568
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1898,7 +1898,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4447103707935420554, guid: 2d174fbc417f68e41b8e4f0e77b7558d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2d174fbc417f68e41b8e4f0e77b7558d, type: 3}
 --- !u!114 &933033178 stripped
 MonoBehaviour:
