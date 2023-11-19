@@ -2062,6 +2062,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 47561681}
     - target: {fileID: 1165700222657227721, guid: 639185035a630ee4e8f8b2279133f35d, type: 3}
+      propertyPath: beginMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165700222657227721, guid: 639185035a630ee4e8f8b2279133f35d, type: 3}
       propertyPath: comicBook
       value: 
       objectReference: {fileID: 587077914}

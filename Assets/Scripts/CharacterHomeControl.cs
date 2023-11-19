@@ -38,15 +38,6 @@ public class CharacterHomeControl : MonoBehaviour
     private void Start()
     {
         camera = Camera.main.GetComponent<Camera>();
-        if (!PlayerPrefs.HasKey("Episode"))
-        {
-            PlayerPrefs.SetInt("Episode", 0);
-        }
-
-        if (PlayerPrefs.GetInt("Episode") == 0)
-        {
-            beginMode = BeginMode.FirstText;
-        }
 
         if (beginMode == BeginMode.FirstText)
         {
