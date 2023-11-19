@@ -6,7 +6,6 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Slider loadSlider;
     [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private Slider slider;
 
     public void LoadLevel (int sceneIndex)
     {
