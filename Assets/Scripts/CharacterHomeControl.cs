@@ -31,6 +31,7 @@ public class CharacterHomeControl : MonoBehaviour
     [SerializeField] private float doorDistance;
     private bool doorIsOpen = false;
     [SerializeField] private bool doorCanOpen = false;
+    [SerializeField] private AudioSource doorOpenSound;
 
     private Camera camera;
 
@@ -107,9 +108,12 @@ public class CharacterHomeControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && doorCanOpen && !doorIsOpen)
         {
             doorAnim.SetTrigger("Open");
+            doorOpenSound.Stop();
+            doorOpenSound.Play();
             doorIsOpen = true;
             speachText.text = "";
             spachBg.color = new Color32(0, 0, 0, 0);
+            StartCoroutine(ShowBeginText(3));
         }
     }
 
@@ -136,7 +140,7 @@ public class CharacterHomeControl : MonoBehaviour
         if (beginTextIndex == 1)
             BellMode();
 
-        if (beginTextIndex == 2)
+        if (beginTextIndex == 3)
         {
             yield return new WaitForSeconds(1.5f);
             for (int i = 2; i < beginText.Count; i++)
