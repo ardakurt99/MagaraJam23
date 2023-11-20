@@ -12,6 +12,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof(AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
+        [SerializeField] private AudioSource bossMusic;
         [SerializeField] private GameObject fight;
 
 
@@ -412,7 +413,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 bossDoor.transform.GetComponent<Collider>().isTrigger = false;
 
+                bossMusic.Stop();
+                bossMusic.Play();
+
             }
+
+            if (other.CompareTag("Sise"))
+            {
+                Debug.Log("Selam");
+                GameObject.FindAnyObjectByType<LevelLoader>().LoadLevel();
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            
         }
     }
 }

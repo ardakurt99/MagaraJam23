@@ -10,6 +10,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         if (!PlayerPrefs.HasKey("Sound"))
         {
             PlayerPrefs.SetFloat("Sound", .5f);

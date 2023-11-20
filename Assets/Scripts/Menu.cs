@@ -7,6 +7,10 @@ public class Menu : MonoBehaviour
 {
 
     [SerializeField] private AudioSource clickFx;
+    [SerializeField] private GameObject ayarlar;
+    [SerializeField] private GameObject yapimcilar;
+    [SerializeField] private GameObject anaMenu;
+    
     public void PlaySound()
     {
         clickFx.Stop();
@@ -28,18 +32,27 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Home");
     }
     
-    public void Devam()
-    {
-    
-    }
 
     public void Ayarlar()
     {
-        //SceneManager.LoadScene("Ayarlar");
+        ayarlar.SetActive(true);
+        yapimcilar.SetActive(false);
+        anaMenu.SetActive(false);
     }
 
     public void Yapimcilar()
     {
-        //SceneManager.LoadScene("Yapimcilar");
+        yapimcilar.SetActive(true);
+
+        ayarlar.SetActive(false);
+        anaMenu.SetActive(false);
+    }
+
+    public void AnaMenu()
+    {
+        anaMenu.SetActive(true);
+
+        ayarlar.SetActive(false);
+        yapimcilar.SetActive(false);
     }
 }

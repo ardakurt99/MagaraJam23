@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
+
 enum BeginMode { Museum, FirstText, Bell, ShowTheDoor, SeeComic, WillHoldComic, HoldComic, SceneTransition }
 public class CharacterHomeControl : MonoBehaviour
 {
@@ -88,6 +90,7 @@ public class CharacterHomeControl : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.E))
                 {
+                    SceneManager.LoadScene(2);
                     beginMode = BeginMode.SceneTransition;
 
                     StartCoroutine(SceneTransition());
@@ -192,15 +195,11 @@ public class CharacterHomeControl : MonoBehaviour
         }
 
 
-        speachText.text = "Burdan sonra sahne geçecek";
+        //speachText.text = "Burdan sonra sahne geçecek";
+
+        
         spachBg.color = new Color32(0, 0, 0, 220);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Sise"))
-        {
 
-        }
-    }
 }
